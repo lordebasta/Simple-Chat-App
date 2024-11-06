@@ -4,7 +4,7 @@ import threading
 import sys
 
 if len(sys.argv) != 3:
-    print ("Usage: ./client.py <IP> <PORT>")
+    print("Usage: ./client.py <IP> <PORT>")
     exit()
 
 HOST = str(sys.argv[1])
@@ -17,15 +17,17 @@ if PORT < 0 or PORT > 65535 or not isinstance(PORT, int):
 client = socket.socket(family=socket.AF_INET, type=socket.SOCK_STREAM)
 client.connect((HOST, PORT))
 
+
 def receive():
     while True:
         try:
             message = client.recv(1024).decode('utf-8')
             print(message)
-        except:
+        except Exception:
             print("An error occurred!")
             client.close()
             break
+
 
 def send():
     username = input("Enter your username: ")
